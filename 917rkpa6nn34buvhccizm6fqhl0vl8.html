@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asad AI Agents — AI Automation & WhatsApp Agent Development</title>
+<meta name="description" content="Asad AI Agents builds custom AI-powered automation — WhatsApp chatbots, n8n workflows, and intelligent agents for businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0F1013;
+    --bg-elev: #16181D;
+    --bg-elev-2: #1C1F26;
+    --text: #ECEAE3;
+    --text-dim: #9CA0AA;
+    --accent: #6C8EFF;
+    --accent-soft: rgba(108,142,255,0.12);
+    --accent-2: #FFB86B;
+    --line: #262A33;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .mono{
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.02em;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  ::selection{ background: var(--accent); color: #0F1013; }
+
+  .wrap{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(15,16,19,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 18px 0;
+  }
+  .logo{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .logo-dot{
+    width:8px;height:8px;border-radius:50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+  }
+  .nav a.navlink{
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    margin-left: 28px;
+    transition: color .2s ease;
+  }
+  .nav a.navlink:hover{ color: var(--text); }
+  .nav-cta{
+    background: var(--accent);
+    color: #0F1013 !important;
+    padding: 9px 18px;
+    border-radius: 7px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    margin-left: 28px !important;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 92px 0 64px;
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 48px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color: var(--accent);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:16px;height:1px;
+    background: var(--accent);
+  }
+  .hero h1{
+    font-size: clamp(2.1rem, 4vw, 3.1rem);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .hero h1 em{
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero p.lead{
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    max-width: 460px;
+    margin-bottom: 32px;
+  }
+  .btn-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .btn-primary{
+    background: var(--accent);
+    color: #0F1013;
+  }
+  .btn-primary:hover{ transform: translateY(-1px); background:#7f9dff; }
+  .btn-ghost{
+    border: 1px solid var(--line);
+    color: var(--text);
+  }
+  .btn-ghost:hover{ border-color: var(--accent); }
+
+  /* ---------- Flow diagram (signature) ---------- */
+  .flow{
+    position: relative;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 36px 24px;
+    min-height: 280px;
+  }
+  .flow-label{
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display:block;
+  }
+  .flow svg{ width:100%; height:auto; display:block; }
+  .flow-node-text{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    fill: var(--text);
+  }
+  .flow-node-sub{
+    font-family: 'Inter', sans-serif;
+    font-size: 9.5px;
+    fill: var(--text-dim);
+  }
+  .dash{
+    stroke-dasharray: 6 6;
+    animation: dashmove 1.6s linear infinite;
+  }
+  @keyframes dashmove{
+    to{ stroke-dashoffset: -24; }
+  }
+  .pulse{
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity: 1; }
+    50%{ opacity: 0.55; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .dash, .pulse{ animation: none; }
+  }
+
+  /* ---------- Section shared ---------- */
+  section{ padding: 72px 0; }
+  .section-head{ margin-bottom: 44px; max-width: 560px; }
+  .section-head .eyebrow{ margin-bottom: 14px; }
+  .section-head h2{ font-size: clamp(1.6rem, 3vw, 2.1rem); margin-bottom: 12px; }
+  .section-head p{ color: var(--text-dim); }
+
+  .divider{
+    border: none;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items:start;
+  }
+  .about-grid p{ color: var(--text-dim); margin-bottom: 16px; }
+  .stat-list{ display:flex; flex-direction:column; gap: 22px; }
+  .stat{ display:flex; gap:16px; align-items:baseline; padding-bottom:18px; border-bottom:1px solid var(--line); }
+  .stat:last-child{ border-bottom:none; }
+  .stat .num{ font-family:'Space Grotesk',sans-serif; font-size:1.6rem; color: var(--accent-2); font-weight:700; min-width:64px; }
+  .stat .desc{ color: var(--text-dim); font-size:0.92rem; }
+
+  /* ---------- Services ---------- */
+  .services{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .service-card{
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 24px;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .service-card:hover{
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  .service-icon{
+    width: 38px; height:38px;
+    border-radius: 9px;
+    background: var(--accent-soft);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 18px;
+  }
+  .service-card h3{ font-size: 1.05rem; margin-bottom: 10px; }
+  .service-card p{ color: var(--text-dim); font-size: 0.9rem; }
+
+  /* ---------- Process ---------- */
+  .process{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    counter-reset: step;
+  }
+  .step{
+    position: relative;
+    padding: 0 20px 0 0;
+  }
+  .step:not(:last-child)::after{
+    content:"";
+    position:absolute;
+    top: 14px;
+    right: -2px;
+    width: 24px;
+    height:1px;
+    background: var(--line);
+  }
+  .step .step-num{
+    font-family:'JetBrains Mono',monospace;
+    color: var(--accent);
+    font-size: 0.8rem;
+    display:block;
+    margin-bottom: 12px;
+  }
+  .step h3{ font-size: 1rem; margin-bottom: 8px; }
+  .step p{ color: var(--text-dim); font-size: 0.88rem; }
+
+  /* ---------- Contact ---------- */
+  .contact-box{
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 48px;
+    display:grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items:center;
+  }
+  .contact-box h2{ font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 14px; }
+  .contact-box p{ color: var(--text-dim); }
+  .contact-links{ display:flex; flex-direction:column; gap:14px; }
+  .contact-link{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding: 14px 18px;
+    background: var(--bg-elev-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 0.92rem;
+    transition: border-color .2s ease;
+  }
+  .contact-link:hover{ border-color: var(--accent); }
+  .contact-link .ic{
+    width: 30px; height:30px;
+    border-radius: 7px;
+    background: var(--accent-soft);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .contact-link .label{ color: var(--text-dim); font-size:0.72rem; display:block; text-transform:uppercase; }
+  .contact-link .value{ font-weight: 600; }
+
+  footer{
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  @media (max-width: 860px){
+    .hero{ grid-template-columns: 1fr; padding-top: 56px; }
+    .about-grid{ grid-template-columns: 1fr; }
+    .services{ grid-template-columns: 1fr; }
+    .process{ grid-template-columns: 1fr; gap: 28px; }
+    .step:not(:last-child)::after{ display:none; }
+    .contact-box{ grid-template-columns: 1fr; padding: 32px 24px; }
+    .nav a.navlink{ display:none; }
+    .nav-cta{ margin-left: 0 !important; }
+    footer{ flex-direction:column; gap:10px; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="logo-dot"></span>Asad AI Agents</div>
+    <nav>
+      <a class="navlink" href="#services">Services</a>
+      <a class="navlink" href="#process">Process</a>
+      <a class="navlink" href="#contact">Contact</a>
+      <a class="navlink nav-cta" href="#contact">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <span class="eyebrow mono">AI Automation Studio</span>
+      <h1>I build AI agents that <em>work while you don't.</em></h1>
+      <p class="lead">Custom WhatsApp AI chatbots and n8n workflow automations that handle customer replies, bookings, and repetitive tasks — so your business runs on autopilot.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://wa.me/923146123115" target="_blank" rel="noopener">Chat on WhatsApp →</a>
+        <a class="btn btn-ghost" href="#services">See what I build</a>
+      </div>
+    </div>
+
+    <div class="flow">
+      <span class="flow-label mono">Live workflow — WhatsApp AI Agent</span>
+      <svg viewBox="0 0 320 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- connecting lines -->
+        <line x1="70" y1="45" x2="70" y2="105" stroke="#6C8EFF" stroke-width="1.5" class="dash"/>
+        <line x1="70" y1="140" x2="70" y2="175" stroke="#6C8EFF" stroke-width="1.5" class="dash"/>
+        <line x1="105" y1="122" x2="215" y2="122" stroke="#FFB86B" stroke-width="1.5" class="dash"/>
+
+        <!-- Node 1: Incoming message -->
+        <rect x="10" y="14" width="120" height="34" rx="8" fill="#1C1F26" stroke="#262A33"/>
+        <circle cx="26" cy="31" r="4" fill="#6C8EFF" class="pulse"/>
+        <text x="38" y="28" class="flow-node-text">Customer message</text>
+        <text x="38" y="40" class="flow-node-sub">WhatsApp</text>
+
+        <!-- Node 2: n8n trigger -->
+        <rect x="10" y="106" width="120" height="34" rx="8" fill="#1C1F26" stroke="#262A33"/>
+        <circle cx="26" cy="123" r="4" fill="#6C8EFF" class="pulse"/>
+        <text x="38" y="120" class="flow-node-text">n8n workflow</text>
+        <text x="38" y="132" class="flow-node-sub">routes &amp; processes</text>
+
+        <!-- Node 3: AI agent -->
+        <rect x="215" y="105" width="100" height="34" rx="8" fill="#1C1F26" stroke="#262A33"/>
+        <circle cx="231" cy="122" r="4" fill="#FFB86B" class="pulse"/>
+        <text x="243" y="119" class="flow-node-text">AI agent</text>
+        <text x="243" y="131" class="flow-node-sub">generates reply</text>
+
+        <!-- Node 4: Reply sent -->
+        <rect x="10" y="176" width="120" height="34" rx="8" fill="#1C1F26" stroke="#262A33"/>
+        <circle cx="26" cy="193" r="4" fill="#6C8EFF" class="pulse"/>
+        <text x="38" y="190" class="flow-node-text">Reply sent back</text>
+        <text x="38" y="202" class="flow-node-sub">instantly, 24/7</text>
+      </svg>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-head">
+      <span class="eyebrow mono">About</span>
+      <h2>Automation, built around how you actually work.</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I design and build AI agents and automation pipelines for small businesses and solo founders — mainly using n8n for workflow logic and Claude/OpenAI for the intelligence layer.</p>
+        <p>Instead of hiring a full-time support person, your customers get instant, accurate replies on WhatsApp — while every booking, lead, or repetitive task gets handled automatically in the background.</p>
+      </div>
+      <div class="stat-list">
+        <div class="stat"><span class="num">24/7</span><span class="desc">Agents reply to customers around the clock, no time off.</span></div>
+        <div class="stat"><span class="num">1:1</span><span class="desc">Every workflow is custom-built for your specific business, not a template.</span></div>
+        <div class="stat"><span class="num">n8n</span><span class="desc">Built on open, self-hostable automation — no vendor lock-in.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-head">
+      <span class="eyebrow mono">Services</span>
+      <h2>What I build</h2>
+      <p>Three core building blocks — combined or standalone, depending on what your business needs.</p>
+    </div>
+    <div class="services">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C8EFF" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h3>WhatsApp AI Chatbots</h3>
+        <p>An agent that answers customer questions, takes orders, and books appointments directly inside WhatsApp — trained on your business.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFB86B" stroke-width="2"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.2 7.2 10.5 16M15.8 7.2 13.5 16"/></svg>
+        </div>
+        <h3>Workflow Automation (n8n)</h3>
+        <p>Connect your tools — Sheets, CRM, email, calendars — so leads, bookings, and follow-ups move without manual work.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C8EFF" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h.01M15 9h.01M9 15c1 1 5 1 6 0"/></svg>
+        </div>
+        <h3>Custom AI Agent Integration</h3>
+        <p>Agents that plug into your existing systems — support desk, internal tools, or a website — built around your exact process.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="section-head">
+      <span class="eyebrow mono">Process</span>
+      <h2>How a project runs</h2>
+    </div>
+    <div class="process">
+      <div class="step">
+        <span class="step-num mono">01</span>
+        <h3>Understand the workflow</h3>
+        <p>A short call to map exactly what should be automated and where the manual work is happening today.</p>
+      </div>
+      <div class="step">
+        <span class="step-num mono">02</span>
+        <h3>Build &amp; connect</h3>
+        <p>The agent and n8n workflow get built, connected to WhatsApp and your existing tools, and tested with real scenarios.</p>
+      </div>
+      <div class="step">
+        <span class="step-num mono">03</span>
+        <h3>Launch &amp; refine</h3>
+        <p>It goes live on your number. I stay on to tune responses and add new automations as your business grows.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-box">
+      <div>
+        <h2>Let's automate something.</h2>
+        <p>Tell me what's eating up your time — I'll tell you if an agent can take it off your plate.</p>
+      </div>
+      <div class="contact-links">
+        <a class="contact-link" href="https://wa.me/923146123115" target="_blank" rel="noopener">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6C8EFF" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+          <span><span class="label mono">WhatsApp</span><span class="value">+92 314 6123115</span></span>
+        </a>
+        <a class="contact-link" href="mailto:iammasad115@gmail.com">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB86B" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+          <span><span class="label mono">Email</span><span class="value">iammasad115@gmail.com</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Asad AI Agents</span>
+  <span class="mono">Built with n8n + AI</span>
+</footer>
+
+</body>
+</html>
